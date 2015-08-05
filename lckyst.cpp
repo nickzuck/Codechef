@@ -13,7 +13,7 @@ int main ()
 	{
 		cin >>  a;
 		temp = a ;  
-		zeros = 0 ;
+		zeros = 0 ; //number of 5's present
 		flag = 1 ;  
 		while (flag == 1){
 			if (temp %5 ==0){
@@ -24,7 +24,7 @@ int main ()
 				flag = 0 ; 
 		}
 		temp = a ; 
-		long long int twos = 0 ; 
+		long long int twos = 0 ;  // number of 2's present
 		flag = 1 ;  
 		while (flag == 1){
 			if (temp %2 ==0){
@@ -35,16 +35,11 @@ int main ()
 				flag = 0 ; 
 		}
 		//cout << "Zeros = "<< zeros << endl; 
-		if (zeros > twos )
-				zeros = zeros - twos ;
-			else
-				zeros  = 0 ; 
-		if (zeros == 0 )
-			cout << a << endl ; 
-		else {
-			temp = four (zeros) ; 
-			cout << a * pow (4,temp)<<endl ; 
-		}
+		if (zeros > twos ){
+			zeros = zeros - twos ;	
+			//wrtite the code over here 
+							
+		 }
 		
 	}
 return 0 ; 

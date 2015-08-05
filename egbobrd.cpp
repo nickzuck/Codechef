@@ -1,32 +1,44 @@
 #include<iostream>
 #include<cmath>
+#define MAX 100002
 
-#define MAX  100002
+using namespace std ; 
 
-using namespace std ;  
-
-
-int main () 
+int main()
 {
-	long int t  , a,  k , count , rembread  , n , i  ;  
-	cin >> t ;  
-	while (t--) {
+	long long int a[MAX] ,  count , rembread  , k , n , t , i;
+	cin >> t ; 
+	while(t--){
 		cin >> n >> k ; 
-		count = 0 ;  
-		rembread = 0 ; 
-		for (i = 1 ; i<= n ; i++ ){
-			cin >> a;  
-			a -= rembread ; 
-			count +=  a/k ;  // full packet calculation 
-
-			// packets which are not eaten fully and their remaining breads  
-			if (a%k !=0 ){
-				count ++ ;  
-				rembread = k  - (a%k) -1 ;
-			}
+		for (i = 0 ; i<n ; i++){
+			cin >> a[i]  ; 
 		}
-			
+
+		count = 0 ; 
+		rembread = 0 ; 
+		for(i = 0 ; i<n ; i++){
+			if(rembread < 0 )
+				rembread  = 0 ; 
+			if (a[i] > rembread){
+				//cout << "You are in if statement\n" ; 
+				a[i] -= rembread ;  
+				count += a[i] / k ; 
+				//cout << "a[i]%k = "<<a[i] %k <<endl ; 
+				//cout << "REm bread = " << rembread << endl ; 
+				if (a[i]%k != 0){
+					//cout << "You are in inner if and a[i]%k = " << a[i]%k << endl ; 
+					count ++ ; 
+					rembread = k - (a[i]%k) ; 
+				}	
+			}
+
+			else{
+				rembread = rembread - a[i] ; 
+			}
+			rembread -- ; 
+		}
 		cout << count << endl ; 
-	}
+		
+	}  
 return 0 ; 
 }
