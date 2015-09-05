@@ -13,32 +13,43 @@ int main ()
     long long int n , m ;
     cin >> t ; 
     while (t--){
+    
+        long long int ones = 0 ;
         cin >> n >> m ; 
         long long int arr[m+1];  
         for (i = 0 ; i<m ; i++){
             cin >> arr[i] ; 
+            if (arr[i] == 1 ){
+                ones++ ; 
+            }
         } 
-
-        sort(arr , arr + m ) ; 
         
-        i =  0  ; 
-        j = m-1 ;
-        
-        long long int count = 0 ; 
-        while (i < j) {
-            //condition to break out of the loop to be corrected or added
+        // there is not even a single chain
+        if (n == m){ 
+            cout << n / 2 << endl ; 
+        }
 
-            if (arr[i] == 1)
-                count ++ ; //tab hoga jab a[i]  = 1 hoga 
-            else 
-                count += 2 ; 
-            arr[j-1] = arr[j] + arr[j-1] + arr[i] ; 
-            i++ ; 
-            j-- ; 
-            if (arr[j] == n || arr[i] == n )
-                break ;
-        } 
-        cout << count << endl ;
+        //all the donuts are in smaller chains
+        else if (ones == 0) {
+            cout << m-1 << endl ; 
+        }
+
+        // some donuts are in chain a some are independent 
+        else {
+            
+           long long int non_ones = m - ones; 
+           if (ones == non_ones-1){
+                cout << ones << endl ;  // only the single donuts are needed to be broken
+            } 
+
+            else {
+                long long int s1 = non_ones -1 ; 
+                long long int s2 = ones/2 ; 
+                cout << s1 + s2 << endl ; 
+            }
+        }
+
+        
     }    
 return 0 ;
 }
