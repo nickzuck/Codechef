@@ -39,7 +39,7 @@ int main ()
 		arr[i] -- ; // we forget to remove the donut when we used this donut chain to join
 	    }
             count ++ ; 
-	    if (i <= j){
+	    if (i < j){
                 temp += arr[j] + 1 ;  // we are connecting the current donut chain to the next largest chain
                 j-- ; 
 	    }
