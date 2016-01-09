@@ -28,7 +28,7 @@ int main(){
         reverse(a2, a2+j); 
 
         cout << "w = " << w << endl ;
-        long long int iLimit = i ;
+        long long int iLimit = i, jLimit = j ;
         for(k=1 ; k<=w ; k++){
             i = 0 ; j= 0 ; ans = 0; 
             n = k ;
@@ -38,13 +38,27 @@ int main(){
                 }
                 else{
                     // Maximum of a2[j] and a1[i] + a1[i+1]
-                    if(a2[j] > a1[i] + a1[i+1] && i+1 <= iLimit){
-                        ans += a2[j];
-                        j ++ ;    
+                    if ( j< jLimit){
+                        if (iLimit >= 2){
+                            if(a2[j] > a1[i] + a1[i+1]){
+                                ans += a2[j];
+                                j ++ ; 
+                            }
+                        }
+                        else{
+                            ans += a2[j];
+                            j ++ ;
+                        }
                     }
-                    else{
-                        ans += a1[i] + a1[i+1] ; 
-                        i += 2;
+                    else if (i <= iLimit){
+                        if(i+1 <= iLimit){
+                            ans += a1[i] + a1[i+1] ; 
+                            i += 2;
+                        }
+                        else{
+                            ans += a1[i] ; 
+                            break ;
+                        }
                     }
 
                 }
