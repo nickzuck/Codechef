@@ -33,54 +33,39 @@ void build (int node , int start , int end)
     }
 }
 
+void update_tree(int node ,int a, int b , int i , int j){
 
-void updateRange(int node, int start, int end, int l, int r)
-{
-    // out of range
-    if (start > end or start > r or end < l)
-        return;
+    if lazy[node] != -1{
+        tree[node] = lazy[node] ;
+        
+        if(a != b){
+            lazy[node*2] += lazy[node] // Mark child as lazy
+            lazy[node*2 +1] += lazy[node] // Mark child as lazy
+        }
 
-    // Current node is a leaf node
-    if (start == end)
-    {
-        // Add the difference to current node
-        if (tree[node] ==1){
-            tree[node] -= 1;
-        }
-        else{
-            tree[node] += 1 ;
-        }
-        return;
+        lazy[node] = -1 // Reset it
     }
 
-    // If not a leaf node, recur for children.
-    int mid = (start + end) / 2;
-    updateRange(node*2, start, mid, l, r);
-    updateRange(node*2 + 1, mid + 1, end, l, r);
+    if (a >b || a >j || b<j )
+        return ;
 
-    // Use the result of children calls to update this node
-    tree[node] = tree[node*2] + tree[node*2+1];
+    if(a>= i && b <= j){
+        if(tree[node])
+            tree[node]  = 0 ; 
+        else
+            tree[node] = 1;
+        if (a != b){
+            lazy[node*2] += value ;
+            lazy[node*2 +1] += value ;
+        }
+        return ;
+    }
+    update_tree(node*2, a, (a+b)/2, i , j );
+    update_tree(node*2+1, 1+ (a+b)/2, i, j); 
+
+    tree[node] = tree[node*2] + tree[node*2 +1] ;
 }
 
-int query(int node , int start , int end , int l , int r) {
-    
-    //range represented by node is completely outside 
-    if (r < start ||  end < l ){
-        return 0 ;
-    }
-
-    //range represented by node is completely inside the node
-    if (l <= start && end  <= r){
-        return tree[node] ;
-    }
-
-    //else : range represented by node is partially inside and 
-    //partially outside the given range
-    int mid = (start + end)/2 ; 
-    int p1 = query(2* node , start , mid , l , r) ; 
-    int p2 = query(2*node +1 , mid+1 , end , l , r) ;
-    return (p1 + p2) ;
-}
 int main ()
 {
     int n,i , z, a, b,q ;
