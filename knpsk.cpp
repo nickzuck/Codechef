@@ -1,73 +1,124 @@
 #include<iostream>
 #include<algorithm>
 
-#define MAX 100002
+#define MAX 200005
 
-using namespace std; 
 
-int main(){
-    long long int t , i , j , a1[MAX] , a2[MAX], n , a , b, ans, k , w; 
-    cin >> t  ; 
-    i = 0 ; j = 0 ; w = 0;
-    while(t--){
-        cin >> a >> b ;
-        w += a;
-        if(a== 1){
-            a1[i++] = b ;
+using namespace std ;
+
+long long answer[MAX] ;
+
+void calculateEven(long long n , long long arr1[] , 
+        long long arr2 [],long long iLimit , long long jLimit){
+
+    long long ans , i = 0  , j = 0 , v1, v2 ;
+    ans = 0 ;
+
+    for (int w = 2 ; w <=n ; w+= 2){
+        v1 = 0 ; v2 = 0 ;
+        if (i+1 < iLimit){
+            v1 = arr1[i] + arr1[i+1] ;
+        }
+        else if (i < iLimit){
+            v1 = arr1[i] ;
+        }
+
+        if(j < jLimit){
+            v2 = arr2[j]  ;
+        }
+
+
+        if(v1 > v2){
+            i += 2 ;
+            answer[w] = v1 + ans ; 
+            ans = answer[w] ;
         }
         else{
-            a2[j++] = b ; 
+            j += 1 ;
+            answer[w] = v2 + ans ; 
+            ans = answer[w] ;
+
         }
+    } 
+}
+
+void calculateOdd(long long n , long long arr1[], long long arr2[] ,
+        long long iLimit, long long jLimit){
+    
+    long long ans = 0, i = 0 , j = 0 , v1 , v2; 
+
+    if(i < iLimit){
+        ans = arr1[i] ;
+        answer[1] = ans ;
+        i++ ;
     }
 
-        cout <<"i = " << i << endl ;
-        cout <<"j = " << j << endl ;
-        sort(a1, a1+i);
-        reverse(a1, a1+i);
-        sort(a2, a2+j) ; 
-        reverse(a2, a2+j); 
-
-        cout << "w = " << w << endl ;
-        long long int iLimit = i, jLimit = j ;
-        for(k=1 ; k<=w ; k++){
-            i = 0 ; j= 0 ; ans = 0; 
-            n = k ;
-            while(n>0){
-                if(n==1){
-                    ans += a1[i++] ; 
-                }
-                else{
-                    // Maximum of a2[j] and a1[i] + a1[i+1]
-                    if ( j< jLimit){
-                        if (iLimit >= 2){
-                            if(a2[j] > a1[i] + a1[i+1]){
-                                ans += a2[j];
-                                j ++ ; 
-                            }
-                        }
-                        else{
-                            ans += a2[j];
-                            j ++ ;
-                        }
-                    }
-                    else if (i <= iLimit){
-                        if(i+1 <= iLimit){
-                            ans += a1[i] + a1[i+1] ; 
-                            i += 2;
-                        }
-                        else{
-                            ans += a1[i] ; 
-                            break ;
-                        }
-                    }
-
-                }
-                n -= 2;
-            }
-            cout << ans << " ";
-
+    for(int w = 3 ; w <= n ; w+= 2){
+        v1 = 0 ; v2 = 0 ; 
+        if(i+1 < iLimit){
+            v1 = arr1[i] + arr1[i-1] ;
         }
-        cout << endl; 
+        else if(i < iLimit){
+            v1 = arr1[i] ;
+        }
 
-return 0 ;
+        if(j < jLimit){
+            v2 = arr2[j] ;
+        }
+
+
+        if(v1 > v2){
+            i+= 2 ; 
+            answer[w] = v1 + ans ;
+            ans = answer[w] ;
+        }
+        else{
+            j += 1 ;
+            answer[w] = v2 + ans ;
+            ans = answer[w] ;
+        }
+    }
+}
+
+void printAnswer(long long n){
+    for(int i =1 ; i <= n ;i++){
+        cout << answer[i] << " " ;
+    }
+}
+int main()
+{
+    long long n , arr1[MAX], arr2[MAX] , i , j, iLimit, jLimit;
+    long long a, b, t , weightSum;
+    cin >> n ;
+    i = 0 ; 
+    j = 0 ;
+    t= n ;
+    weightSum = 0 ;
+    while(t--){
+        cin>> a >> b; 
+        weightSum += a ;
+        if(a == 1){
+            arr1[i]= b ;
+            i++ ;
+        }
+        else{
+            arr2[j] = b ;
+            j++ ;
+        }
+
+   // cout << "Weight sum = " << weightSum << endl ;
+
+    }
+    iLimit = i ; 
+    jLimit = j ;
+
+    sort(arr1 , arr1+iLimit);
+    sort(arr2, arr2 + jLimit);
+    reverse(arr1, arr1+ iLimit);
+    reverse(arr2 , arr2+jLimit);
+
+    calculateEven(weightSum, arr1, arr2, iLimit, jLimit);
+    calculateOdd(weightSum, arr1, arr2, iLimit, jLimit);
+    printAnswer(weightSum) ;
+return 0;
 }
