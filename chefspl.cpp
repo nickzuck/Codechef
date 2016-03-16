@@ -19,7 +19,7 @@ class Chefspl
     }
 
     // x denotes the letter from the string which is removed
-    bool isDoubleString(int x = -1){
+    bool isDoubleString(){
         // Double string not possible for odd string and 0 length
         if(len == 0 || len%2 != 0)
             return false ;
@@ -70,7 +70,7 @@ class Chefspl
         }
         else if (len > 1){
             int h  = len/2 ;
-            flag = (isSubsequence(0, h , h+1, len-1) or isSubsequence(0, h-1, h,len-1));
+            flag = (isSubsequence(0, h -1, h, len-1) or isSubsequence(h+1, len-1, 0,h));
         }
 
         if(flag){
