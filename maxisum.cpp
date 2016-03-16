@@ -1,24 +1,42 @@
-/*
-IDEA: Find the min value of B[i]  corresponding to -ve A[i]
-      Find the max value of B[i]  corresponding to +ve A[i]
-      And increase or decrease the value according to the values of maxb and minb which can determine the change which  must be followed to make the effect better
- */
-
 #include<iostream>
+#include<algorithm>
+#include<cmath>
 
-using namespace std ; 
+#define MAX 100002
 
-def findMinMaxB(long long a[], long long b[], long long n){
-    long long mini, maxi, i; 
-    maxb = -100002 ; 
-    minb = 100002 ; 
-    for(i = 0 ; i< n; i ++){
-        if(a[i] > 0){
-            //find maximum b
-            if(maxb < b[i]){
-                
+using namespace std ;
+
+
+int main()
+{
+    long long int a[MAX] , n , k , b[MAX], t, i, maxi, mIndex, sum , multiple, maxMultiple; 
+    cin >>t ;
+    while(t--){
+        cin >> n >> k ; 
+        for(i = 0 ; i< n ; i++){
+            cin >> a[i] ; 
+        }
+
+        for(i = 0 ; i < n ;i++){
+            cin >> b[i] ; 
+        }
+
+        maxi = -100002 ; 
+        mIndex = -1 ; 
+        sum = 0 ;
+        maxMultiple = -100000000002 ; 
+        for(i = 0 ; i < n ; i++){
+            multiple = a[i] * b[i] ;          
+            sum += multiple ; 
+            if(abs(b[i]) > maxi){
+                maxi = abs(b[i]);
+                mIndex = i ; 
             }
         }
-    }
 
+        sum += abs(b[mIndex] *k);
+
+        cout << sum << endl ;
+    }
+return 0 ;
 }
