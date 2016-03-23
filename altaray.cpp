@@ -6,10 +6,10 @@ using namespace std ;
 
 int main()
 {
-    int arr[MAX] , i , j , n ,temp, ans[MAX]; 
-    int t ; 
+    long long int arr[MAX] , i , j , n ,temp, ans[MAX]; 
+    long long int t ; 
     cin >> t ; 
-    ans[n] = 1 ;
+  
     while(t--){
         cin >> n ;
         for (i = 0 ;i < n ;i++){
@@ -20,8 +20,9 @@ int main()
                 arr[i] = 1;
         }
 
-
-       for(i = n-1 ;i>= 1 ;i--){
+	/* Changed the position of below one line*/
+       ans[n-1] = 1 ; 
+       for(i = n-2 ;i>= 0 ;i--){
         if(arr[i]*arr[i+1] < 0){
             ans[i] = ans[i+1] + 1;
         }
