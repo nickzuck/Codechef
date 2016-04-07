@@ -1,37 +1,24 @@
-#include<iostream>
-#include<algorithm>
-#include<cmath>
+#include<stdio.h>
 
 #define ll long long
-#define MOD 1000000007
-using namespace std ;
+#define M 1000000007
 
-ll fast_exp(ll base, ll exp) {
-    ll res=1;
-    while(exp>0) {
-       if(exp%2==1){
-           res=(res*base)%MOD;
-       }
-
-       base=(base*base)%MOD;
-       exp = exp >> 1 ;
-    }
-    return res%MOD;
+ll pw(ll a, ll b){
+  ll r;
+  if(b==0) return 1;
+  r = pw(a,b/2);
+  r = (r*r)%M;
+  if(b%2) r = (r*a)%M;
+  return r;
 }
 
 int main()
 {
-
-    long long int t, n , k , ans ; 
-    cin >>t ;
+    ll t, n, k ;
+    scanf("%lld", &t);
     while(t--){
-        cin >> n >> k ; 
-        ans  = (fast_exp(k-1, n-1)) ;
-        cout << "Power value = " << ans%MOD << endl ;
-        k %= MOD ;
-        ans *= k;
-        cout << ans % MOD<< endl ;
-       
+        scanf("%lld %lld", &n , &k) ;
+        printf("%lld\n", (pw(k-1, n-1)*k)%M);
     }
 return 0 ;
 }
