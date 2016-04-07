@@ -1,10 +1,11 @@
+MOD = 1000000007
 def ipow(base, exp):
     result = 1
     while(exp):
-        if(exp&1):
-            result *= base
+        if(exp%2  == 1):
+            result = (result* base)%MOD
         exp >>= 1
-        base *= base
+        base = (base*base)%MOD
     return result
 
 
@@ -17,5 +18,8 @@ for t in range(input()):
         #ans = ((k-1)**(n-1))*k
 
         # Efficient method
-        ans = (ipow(k-1, n-1))*k
+        ans = (ipow(k-1, n-1))
+        print "value from function",  ans 
+        k = k%MOD
+        ans *= k
         print ans%1000000007
