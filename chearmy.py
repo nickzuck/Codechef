@@ -19,7 +19,8 @@ def abc(k):
         #print "count = ", count
         rem = k - temp2
         r1, r2 = qwer(rem, temp2)
-        #print "r2 =", r2 
+        print "r1 = ", r1
+        print "r2 = ", r2 
         s  = s + s*r1
         k = r2
         finalSum += s
