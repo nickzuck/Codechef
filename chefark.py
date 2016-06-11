@@ -16,7 +16,10 @@ for _ in range(input()):
     n , k = map(int, raw_input().split())
     arr = map(int, raw_input().split())
     if k>n : 
-        k = k%n 
+        k = k%n
+        if n%2 != 0 :
+            k+= 1
+
     ans = 0 
     if k%2 == 0 :
         if n == 2 and k ==2 : 
