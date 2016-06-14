@@ -44,13 +44,26 @@ def calculate(n , k ) :
     else: 
         for i in range(1, k+1, 2):
             ans += binomial(n, i)
-    print ans 
+    print ans%1000000007
+
+def findZeros(arr):
+    counter = 0 
+    for i in arr: 
+        if i == 0:
+            counter += 1
+    return counter
 
 
 for _ in range(input()):
     n, k = map(int ,raw_input().split())
     arr = map(int, raw_input().split())
-    if k <= n :
+    zeros = findZeros(arr)
+    if zeros  == n : 
+        print "1"        
+    
+    if zeros >0: 
+        print (n*(n+1))/2
+    elif k <= n :
         calculate(n , k)
     else:
         # if k is odd, find the value of the largest odd value 
