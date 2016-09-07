@@ -11,10 +11,9 @@ using namespace std  ;
 int main()
 {
     map<pair<int, int>, int> counter ;
-    int a , b, c, i , j, len; 
-    int ans = 0 ; 
+    int a= 0 , b  = 0 , c = 0 , i , j, len; 
+    long long int ans = 0 ; 
     char str[MAX] ; 
-    a = b = c = 0 ;
     
     cin >> str ; 
     len = strlen(str);
