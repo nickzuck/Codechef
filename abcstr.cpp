@@ -12,12 +12,13 @@ int main()
 {
     map<pair<int, int>, int> counter ;
     int a , b, c, i , j, len; 
-    int ans ; 
+    int ans = 0 ; 
     char str[MAX] ; 
     a = b = c = 0 ;
     
     cin >> str ; 
     len = strlen(str);
+    counter[make_pair(0,0)]++ ;
     for(i = 0  ; i < len ; i++){
         a += str[i] == 'A' ; 
         b += str[i] == 'B';
