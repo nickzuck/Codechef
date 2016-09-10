@@ -8,7 +8,7 @@ for _ in range(input()):
     possible = True
     replacement = "abcdefghijklmnopqrstuvwxyz"
     while(i<=j):
-        if s[i] != '.'  and s[i] != '.':
+        if s[i] != '.'  and s[j] != '.':
             if s[i] == s[j]:
                 newStringFront.append(s[i])
                 newStringBack.append(s[j])
