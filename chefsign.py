@@ -1,47 +1,20 @@
 for _ in range(input()):
     a = raw_input()
-    curr = 1 
-    maxi = 1 
-    maxPos = 1
-    ans = []
+    a = a.replace("=", "")
+    longest= 0 
     n = len(a)
-    for i in range(n):
-        if a[i] == '<':
-            curr += 1
-            if curr > maxi: 
-                maxi = curr
-                maxPos = i+1
-        elif a[i] == '>':
-            curr -=1 
-            if curr == 0 :
-                curr = 1
-                maxi += 1
-        else:
-            continue
-    
-    """
-    curr = 1
-    for i in range(n):
-        if i != maxPos:
-            print curr, a[i],
-            if(a[i] == '<'):
-                curr += 1
-            elif(a[i] == '>'):
-                curr -=1
-            if (i != n-1 and i != 0):
-                if(a[i] == '<' and a[i+1] == '>'):
-                    curr = maxi
-                elif(a[i] == '>' and a[i+1] == '<'):
-                    curr = 1
+    if n == 0:
+        print 1
+    else:
+        prev = a[0]
+        curr_len = 1 
+        for i in range(1, n):
+            if prev == a[i]:
+                curr_len += 1
+            else:
+                longest = max(longest, curr_len)
+                curr_len = 1 
+                prev = a[i]
 
-        else:
-            curr = maxi
-            print curr, a[i],
-
-            if(a[i] == '<'):
-                curr += 1
-            elif(a[i] == '>'):
-                curr -=1
-    print curr
-    """
-    print maxi
+        longest = max(longest, curr_len)
+        print longest+1
