@@ -1,50 +1,36 @@
 #include<bits/stdc++.h>
 
+#define MAX 200002
+
 using namespace std ;
+
 
 int main(){
     
-    int t, n, k ;
+    int t, n, k , temp;
     cin >> t ;
     while(t--){
         cin >> n >> k ; 
-        int arr[n+1] ;
+
+        int arr[MAX] = {0}; 
         for(int i =0 ;i < n ; i++){
-            cin >> arr[i] ; 
+            cin >> temp ; 
+            arr[temp] = 1 ;
         }
 
-        sort(arr, arr+n) ; 
-        int expected = 0 ;
-        cout << "Processing started\n" ;
-        int ans = -1 ;
-        for(int i = 0; i < n ; i++){
-            cout << "i = " << i << endl ;
-            if(arr[i] != expected){
-                if (k > 0 ){
-                    k -= 1 ;
-                    expected += 1 ;
-                }
-                else{
-                    ans = expected ;
-                }
+        int i ;
+        for(i = 0 ; ; i++ ) {
+            if(k == 0 and arr[i] == 0){
+                break;
             }
-            else{
-                expected ++ ;
-            }
-        }
-        if (ans != -1){
-            cout << ans << endl ;   
-        }
-        else{
-            ans =  arr[n-1] + 1 ;
-            while(k > 0){
-                ans += 1 ;
-                k -= 1 ;
-            }
-            cout << ans << endl ;
-        }
 
-    }
+            if(arr[i] == 0){
+                k -- ;
+            }
+        }
+        cout << i << endl ;
 
+   } 
+        
     return 0 ;
 }
