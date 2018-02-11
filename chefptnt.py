@@ -3,8 +3,8 @@ for _ in range(input()):
     s = raw_input()
     count_even = 0
     count_odd = 0
-    for i in s:
-        if i=='E':
+    for i in range(k):
+        if s[i]=='E':
             count_even += 1 
         else:
             count_odd += 1
