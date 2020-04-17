@@ -1,3 +1,5 @@
+// Completely unclear problem statement
+
 #include<bits/stdc++.h>
 
 using namespace std ;
