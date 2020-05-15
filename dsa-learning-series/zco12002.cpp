@@ -32,33 +32,20 @@ int main(){
 	}
 
 	sort(vHoles.begin(), vHoles.end());
-	sort(wHoles.begin(), wHoles.end(), greater<int>());
+	sort(wHoles.begin(), wHoles.end());
 
 	// printVector(vHoles);
 	// printVector(wHoles);
 	int wLen = wHoles.size(), vLen = vHoles.size() ;
 	int vPtr = 0 , wPtr = 0, minTime = INT_MAX ;
 	for(int i = 0 ;i < n ; i++){
-		int testTime = v[i].second - v[i].first ;
-		if (testTime > minTime){
-			continue ;
-		}
-		vPtr = 0 ; wPtr = 0 ;
-		// cout << "Before while loop : " << v[i].first << " " << v[i].second << " "  << vHoles[vPtr] << " " << wHoles[wPtr] << " " << vPtr << " " << wPtr <<endl ; 
+		int r = upper_bound(vHoles.begin(), vHoles.end(), v[i].first) - vHoles.begin() - 1;
+		int q = lower_bound(wHoles.begin(), wHoles.end(), v[i].second) - wHoles.begin();
 
-		while(vHoles[vPtr] <= v[i].first and wHoles[wPtr] >= v[i].second) {
-			if (wPtr >= wLen || vPtr >= vLen){
-				break ;
-			}
-			// cout << v[i].first << " " << v[i].second << " "  << vHoles[vPtr] << " " << wHoles[wPtr] << endl ; 
-			// minTime = min((v[i].first - vHoles[vPtr]) + (wHoles[wPtr] - v[i].second), minTime);
-			minTime = min(wHoles[wPtr] - vHoles[vPtr] + 1, minTime);
-			if (vHoles[vPtr+1] < v[i].first and vPtr < vLen-1) {
-				vPtr ++ ;
-			} else {
-				wPtr ++ ;
-			}
-		}
+		// cout << r << " " << q << endl ;
+		if (r >=0 and r < vLen and q >= 0 and q < wLen) 
+			minTime = min(wHoles[q] - vHoles[r] + 1, minTime);
+			
 	
 	}
 	cout << minTime << endl ;
