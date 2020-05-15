@@ -39,6 +39,10 @@ int main(){
 	int wLen = wHoles.size(), vLen = vHoles.size() ;
 	int vPtr = 0 , wPtr = 0, minTime = INT_MAX ;
 	for(int i = 0 ;i < n ; i++){
+		int testTime = v[i].second - v[i].first ;
+		if (testTime > minTime){
+			continue ;
+		}
 		vPtr = 0 ; wPtr = 0 ;
 		// cout << "Before while loop : " << v[i].first << " " << v[i].second << " "  << vHoles[vPtr] << " " << wHoles[wPtr] << " " << vPtr << " " << wPtr <<endl ; 
 
