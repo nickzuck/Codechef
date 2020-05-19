@@ -23,18 +23,11 @@ int main(){
 	int count = 0 ;
 	sort(v1.begin(), v1.end());
 	sort(v2.begin(), v2.end());
-	for(int i = 0 ;i < n ;i++){
-		for(int j= m-1 ; j >= 0; j--){
-			// cout << "sum : " << v1[i] + v2[j] << endl ;
-			if (count == n+m-1) {
-				break;
-			}
-			// if (s.find(v1[i].first + v2[j].first) == s.end() && count < n+m-1){
-				count += 1 ;
-				cout << v1[i].second  << " "  << v2[j].second << endl ;
-				// s.insert(v1[i].first + v2[j].first);
-			// }
-		}
+	for(int i = 0 ;i < m ; i++){
+		cout << v1[0].second << " " << v2[i].second << endl ;
+	}
+	for(int i = 1 ; i < n ; i++){
+		cout << v1[i].second << " " << v2[m-1].second << endl ;
 	}
 	return 0;
 }
