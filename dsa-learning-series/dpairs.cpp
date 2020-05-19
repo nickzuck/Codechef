@@ -29,11 +29,11 @@ int main(){
 			if (count == n+m-1) {
 				break;
 			}
-			if (s.find(v1[i].first + v2[j].first) == s.end() && count < n+m-1){
+			// if (s.find(v1[i].first + v2[j].first) == s.end() && count < n+m-1){
 				count += 1 ;
 				cout << v1[i].second  << " "  << v2[j].second << endl ;
-				s.insert(v1[i].first + v2[j].first);
-			}
+				// s.insert(v1[i].first + v2[j].first);
+			// }
 		}
 	}
 	return 0;
