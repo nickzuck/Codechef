@@ -11,7 +11,6 @@ for i in range(t):
 	ans = []
 	n = input()
 	s = []
-	queue = []
 	inp = input()
 	for char in inp :
 		# print (s, ans)
@@ -22,11 +21,10 @@ for i in range(t):
 				ans.append(s.pop())
 			s.pop()
 		elif char in operands:
-			q = []
 			if len(s) > 0 :
 				top = s[-1]
 				if top in operands:
-					while(ops[top] > ops[char]):
+					while(ops[top] >= ops[char]):
 						ans.append(s.pop())
 						if len(s) == 0 :
 							break
