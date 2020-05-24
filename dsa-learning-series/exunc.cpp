@@ -2,15 +2,15 @@
 
 using namespace std ;
 
-// void printVector(vector<int> v){
-// 	cout << "printing vector \n";
-// 	int n= v.size();
-// 	for(int i = 0 ; i < n-1 ; i++){
-// 		cout << v[i]<< " " ;
-// 	}
-// 	cout << "vector printed\n";
+void printVector(vector<int> v){
+	cout << "printing vector \n";
+	int n= v.size();
+	for(int i = 0 ; i < n-1 ; i++){
+		cout << v[i]<< " " ;
+	}
+	cout << "vector printed\n";
 
-// }
+}
 
 void printSet(set<int> s) {
 	set<int>::iterator it ;
@@ -50,7 +50,8 @@ int main(){
 		if (queryType == 1){
 			cin >> j >> newVal;
 			j -= 1;
-
+			v[j] = newVal;
+			// printVector(v);
 			if (j >0 and v[j] %v[j-1] == 0){ // If they lie in same set, remove the boundary element
 				s.erase(j);
 			} else {
@@ -58,10 +59,10 @@ int main(){
 				// s.insert(j-1) ;
 			}
 
-			if(v[j] %v[j+1] == 0 ){
+			if(v[j+1] % v[j] == 0 ){
 				s.erase(j+1) ;
 			} else {
-				s.insert(j) ;
+				// s.insert(j) ;
 				s.insert(j+1);
 			}
 			// printSet(s);
@@ -69,7 +70,7 @@ int main(){
 		} else {
 			cin >> j ;
 			j -= 1;
-			it = s.find(j);
+			it = s.upper_bound(j);
 			it -- ;
 			cout << *it +1 << endl; 
 		}
