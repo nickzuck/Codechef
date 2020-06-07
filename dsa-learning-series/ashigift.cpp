@@ -15,7 +15,7 @@ bool canCross(long long balance, vector<pr> &v){
 
 		// cout << "balance : " << balance << endl ;
 		// cout << "pos , required, gain " << v[i].first << " " << required << "  " << gain << endl ;
-		if(balance > required) 
+		if(balance >= required)
 			balance += gain ;
 		if(balance < 0){
 			return false ;
@@ -28,7 +28,10 @@ bool compare(pr p1, pr p2){
 	if(p1.first < p2.first){
 		return true ;
 	} 
-	return p1.second.first > p2.second.first;
+	else if (p1.first == p2.first){
+		return p1.second.first > p2.second.first ;
+	}
+	return false ;
 	
 }
 
@@ -55,15 +58,16 @@ int main(){
 			v.pb(mp(temp1, mp(temp3, temp2)));
 		}
 
-		sort(v.begin(), v.end(), compare);
+		sort(v.begin(), v.end());
 
 		long long start = 0 , end = max_poison;
 		long long ans = end ;
 		while(start <= end){
 			// cout << "processing \n" ;
 			long long mid = (start +end)/2 ;
-			if(canCross(mid, v)){
-				ans = min(ans, mid);
+			if(canCross(mid+1, v)){
+				// cout << "can cross" << endl ;
+				ans = mid ;
 				end = mid -1 ;
 			} else {
 				start = mid +1 ;
