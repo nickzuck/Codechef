@@ -1,20 +1,35 @@
 #include<bits/stdc++.h>
 
-#define pr pair<long long, long long>
+#define pr pair<long long, pair<long long, long long> >
 #define pb push_back
 #define mp make_pair
 
 using namespace std ;
 
 
-bool canCross(long long intial, vector<pr> &v){
+bool canCross(long long balance, vector<pr> &v){
+	// cout << "\n\nintial balance : " << balance << endl ;
 	for(long long i = 0 ; i < v.size(); i++){
-		intial += v[i].second ;
-		if(intial < 0){
+		long long required = v[i].second.second ;
+		long long gain = v[i].second.first ;
+
+		// cout << "balance : " << balance << endl ;
+		// cout << "pos , required, gain " << v[i].first << " " << required << "  " << gain << endl ;
+		if(balance > required) 
+			balance += gain ;
+		if(balance < 0){
 			return false ;
 		}
 	}
-	return intial > 0 ;
+	return balance > 0 ;
+}
+
+bool compare(pr p1, pr p2){
+	if(p1.first < p2.first){
+		return true ;
+	} 
+	return p1.second.first > p2.second.first;
+	
 }
 
 int main(){
@@ -29,7 +44,7 @@ int main(){
 		long long max_poison = 0 ;
 		for (long long i = 0 ;i < b; i++){
 			cin >> temp1 >> temp2 ;
-			v.pb(mp(temp1, -temp2)) ;
+			v.pb(mp(temp1, mp(-temp2, 0))) ;
 			max_poison += temp2 ;
 		}
 
@@ -37,17 +52,13 @@ int main(){
 		for(long long i = 0 ;i < c ; i++){
 			// cout << "input here\n" ; 
 			cin >> temp1 >> temp2 >> temp3 ;
-			temp2 = min(temp2, temp3);
-			v.pb(mp(temp1, temp2));
+			v.pb(mp(temp1, mp(temp3, temp2)));
 		}
 
-		sort(v.begin(), v.end());
-		long long count = 0 ;
-		for(long long i= 0 ;i < v.size() ; i++){
-			count += v[i].second ;
-		}
+		sort(v.begin(), v.end(), compare);
 
-		long long start = 1 , end = max_poison, ans = max_poison;
+		long long start = 0 , end = max_poison;
+		long long ans = end ;
 		while(start <= end){
 			// cout << "processing \n" ;
 			long long mid = (start +end)/2 ;
