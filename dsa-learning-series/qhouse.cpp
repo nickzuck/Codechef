@@ -31,12 +31,14 @@ int binarySearchCoordinate(int start, int end, bool findX, int otherVal) {
 int main (){
 	// Binary Search y=0 coordinate
 	int x1 = binarySearchCoordinate(0, 1000, true, 0);
-	int y1 = binarySearchCoordinate(0, 1000, false, x1);
+	// int y1 = binarySearchCoordinate(0, 1000, false, x1);
+	int y1 = 2*x1 ; // since it is a square 
 
 	int x2 = binarySearchCoordinate(x1, 1000, true, y1);
 	int y2 = binarySearchCoordinate(y1, 1000, false, 0);
 
-	int area  = ((y2-y1) * x2 ) + (2*y1 * 2*x1);
+	// cout << "(y2-y1) : " << (y2-y1) << endl ;
+	int area  = ((y2-y1) * x2 ) + (2*x1 * 2*x1);
 
 	// cout << x1 << " " << y1 << " " << x2 << " " << y2 << endl; 
 	cout <<"! " <<area << endl ;
