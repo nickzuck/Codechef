@@ -10,6 +10,12 @@ double distance(pr p1, pr p2){
 	return sqrt( (p1.first - p2.first)*(p1.first - p2.first) + (p1.second - p2.second)*(p1.second - p2.second) );
 }
 
+bool sortbysec(const pr &a, 
+              const pr &b) 
+{ 
+    return (a.second < b.second); 
+} 
+
 int main(){
 	int t , n ;
 	double x , y; 
@@ -24,6 +30,11 @@ int main(){
 
 		sort(v.begin(), v.end());
 		double dis, min_dis = INT_MAX ;
+		for(int i = 1 ; i < n-1; i++){
+			dis += distance(v[i-1], v[i]) + distance(v[i], v[i+1]) + distance(v[i-1], v[i+1]);
+			min_dis = min(dis, min_dis);
+		}
+		sort(v.begin(), v.end(), sortbysec);
 		for(int i = 1 ; i < n-1; i++){
 			dis += distance(v[i-1], v[i]) + distance(v[i], v[i+1]) + distance(v[i-1], v[i+1]);
 			min_dis = min(dis, min_dis);
