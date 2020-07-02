@@ -14,7 +14,7 @@ int main(){
 	int t , n ;
 	double x , y; 
 	cin >> t ;
-	while (t--){
+	for(int cs = 1 ; cs <= t ; cs++){
 		cin >> n ;
 		vector<pr> v ;
 		for (int i = 0 ; i < n; i++){
@@ -29,7 +29,7 @@ int main(){
 			min_dis = min(dis, min_dis);
 		}
 
-		cout << setprecision(12) << min_dis << endl ;
+		cout << "Case " << cs << ": "<< setprecision(12) << min_dis << endl ;
 	}
 	return 0;
 }
