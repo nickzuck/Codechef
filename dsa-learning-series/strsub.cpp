@@ -57,21 +57,19 @@ int main(){
 			r-- ;
 			for(int i = l ; i  <= r ; i++ ){
 				int val = min(i + 2*K -1, r) ;
-				for (int j= i ; j <= val ; j++){
-					int count0 = 0 , count1 = 0 ;
-					for (int k = i ; k <= j ; k++){
-						if(str[k] == '1'){
-							count1++;
-						} else {
-							count0 ++;
-						}
-
-						if(count0 > K  or count1 > K){
-							// cout << "invalid for : " << i << " " << j << " " << count0 << "  " << count1  << endl ;
-							break;
-						}
+				int count0 = 0 , count1 = 0 ;
+				for (int j= i ; j <= val ; j++){					
+					// for (int k = i ; k <= j ; k++){
+					if(str[j] == '1'){
+						count1++;
+					} else {
+						count0 ++;
 					}
-					if (count0 <= K and count1 <= K ){
+
+					if(count0 > K  or count1 > K){
+						// cout << "invalid for : " << i << " " << j << " " << count0 << "  " << count1  << endl ;
+						break;
+					} else {
 						ans ++ ;
 					}
 				}
