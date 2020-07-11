@@ -6,6 +6,7 @@
 
 using namespace std ;
 
+
 int main(){
 	int t , n, q, K; 
 	cin >> t ;
@@ -15,7 +16,7 @@ int main(){
 		int l, r ;
 		cin >> str ;
 		while(q--){
-			int ans = 0 ;
+			long int ans = 0 ;
 			cin >> l >> r ;
 			l-- ; 
 			r-- ;
