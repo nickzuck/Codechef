@@ -19,18 +19,23 @@ bool isPerfectSquare(long double x)
 int main(){
 	int t , n; 
 	cin >> t ;
-	int limit =  sqrt(INT_MAX);
 	while (t--){
 		cin >> n ;
-		int ans ; 
+		long long ans = INT_MAX ; 
+		long long limit =  sqrt(n);
 		bool found = false ;
-		for (int i = 1 ; i < limit ; i++){
-			int sqValue = i*i ;
-			if (isPerfectSquare(n+sqValue)){
-				ans = sqValue ;
-				found = true ;
-				break; 
+		for (long long i = 1 ; i <= limit ; i++){
+			// cout << "here";
+			// cout << " i = " << i  << endl ;
+			if (n % i == 0 and n/i != i){
+				long long a = (n/i - i)/2; 
+				long long b = (n/i + i)/2;
+				if (n + a*a == b*b){
+					found = true ;
+					ans = min(a*a, ans) ;
+				}
 			}
+			
 		}
 		if (found){
 			cout << ans << endl; 
