@@ -32,13 +32,13 @@ int main(){
 				long long b = (n/i + i)/2;
 				if (n + a*a == b*b){
 					found = true ;
-					ans = min(a*a, ans) ;
+					ans = min(a, ans) ;
 				}
 			}
 			
 		}
 		if (found){
-			cout << ans << endl; 
+			cout << ans * ans << endl; 
 		} else {
 			cout << -1 << endl ;
 		}
