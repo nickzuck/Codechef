@@ -14,43 +14,65 @@ void printVector(vector<int> v){
 	cout << "vector printed\n" ;
 }
 
+
 int main(){
 	int t , n; 
 	cin >> t ;
 	while (t--){
 		cin >> n ;
+		int nVal = n ;
 		// cout << "input : " << n ;
-		int  limit = sqrt(n);
-		vector<int> prime_factors;
-		while(n %2 == 0 ){
-			prime_factors.pb(2);
-			// cout << "where ;" ;
-			n /= 2;
+		int limit = sqrt(n);
+		vector<int> primes;
+
+		map<int, bool> isPrime ;
+		for (int i = 1 ; i <= limit ; i++){
+			isPrime[i] = true ;
 		}
 
-		for(int i = 3 ;i < limit; i+= 2){
-			while( n % i == 0){
-				n /= i ;
-				prime_factors.pb(i);
+		for (int i = 2 ; i <= limit ; i ++){
+			if (isPrime[i]){
+				for(int j = i ; j <= limit ; j*= i){
+					isPrime[j] = false ;
+				}
+				primes.pb(i);
 			}
-			// cout << "here" ;
 		}
 
-		int prime_len = prime_factors.size() ;
+		int prime_len = primes.size() ;
 
-		// printVector(prime_factors);
-		// cout << "checking prosasdf";
-		// Check possibilities 
-		bool possible = true ;
-		if (prime_len < 2){
-			possible = false ;
-		} else if (prime_factors[0] == prime_factors[prime_len-1]){
-			possible = false ;
+		// printVector(primes);
+
+		// Generate all semiprimes
+		map<int, bool> mp ; 
+
+		vector<int> semiprimes ; 
+		int vectorLen = primes.size() ;
+		for (int i = 0 ;i < vectorLen ; i++){
+			for (int j = i ; j < vectorLen ; j++){
+				if (primes[i] == primes[j]) {
+					continue ;
+				}
+				int temp = primes[i] * primes[j] ;
+				semiprimes.pb(temp) ;
+				mp[temp] = true ;
+			}
 		}
+		// printVector(semiprimes);
+
+		bool found = false ;
+		int semiprimesLen = semiprimes.size();
+		for(int i = 0 ; i < semiprimesLen ; i++){
+			if (mp.find(nVal - semiprimes[i]) != mp.end()) {
+				found = true ;
+				break ;
+			}
+		}
+
 
 
 		// Print answer 
-		if (possible){
+		if (found){
 			cout << "YES\n" ; 
 		} else {
 			cout << "NO\n" ;
