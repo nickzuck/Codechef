@@ -22,7 +22,7 @@ int main(){
 		cin >> n ;
 		int nVal = n ;
 		// cout << "input : " << n ;
-		int limit = sqrt(n);
+		int limit = n ;
 		vector<int> primes;
 
 		map<int, bool> isPrime ;
@@ -32,7 +32,7 @@ int main(){
 
 		for (int i = 2 ; i <= limit ; i ++){
 			if (isPrime[i]){
-				for(int j = i ; j <= limit ; j*= i){
+				for(int j = i ; j <= limit ; j+= i){
 					isPrime[j] = false ;
 				}
 				primes.pb(i);
