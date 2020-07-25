@@ -6,9 +6,9 @@
 
 using namespace std ;
 
-long long MAX_LIMIT = pow(10,18);
+unsigned long long MAX_LIMIT = pow(10,18);
 
-void printVector(vector<long long > v){
+void printVector(vector<unsigned long long > v){
 	cout << "printing vector \n" ;
 	for(int i = 0 ;i < v.size() ; i++){
 		cout << v[i] << " " ;
@@ -16,9 +16,9 @@ void printVector(vector<long long > v){
 	cout << "vector printed\n" ;
 }
 
-map<long long, bool> powersOfTwo(vector<long long>&twosVector){
-	long long n = 1 ;
-	map<long long, bool> twos ;
+map<unsigned long long, bool> powersOfTwo(vector<unsigned long long>&twosVector){
+	unsigned long long n = 1 ;
+	map<unsigned long long, bool> twos ;
 	while(n <= MAX_LIMIT){
 		twos[n] = true ;
 		twosVector.pb(n) ;
@@ -28,15 +28,15 @@ map<long long, bool> powersOfTwo(vector<long long>&twosVector){
 	return twos ;
 }
 
-map<long long, long long> preprocess(map<long long, bool> &twos){
-	map<long long, long long> mp ;
+map<unsigned long long, unsigned long long> preprocess(map<unsigned long long, bool> &twos){
+	map<unsigned long long, unsigned long long> mp ;
 
 	mp[1] = 0 ;
 	mp[2] = 1 ;
-	long long  first = 0, second = 1;
+	unsigned long long  first = 0, second = 1;
 	for (int i = 3 ; i <= 60 ; i++){
 	
-		long long  temp = first ;
+		unsigned long long  temp = first ;
 		first = second ;
 		second += temp ;
 
@@ -52,19 +52,19 @@ map<long long, long long> preprocess(map<long long, bool> &twos){
 
 
 int main(){
-	long long t , n; 
+	unsigned long long t , n; 
 	cin >> t ;
 	// cout << "preprocessing\n";/
-	vector<long long> twosVector ;
-	map<long long, bool> twos = powersOfTwo(twosVector) ;
-	map<long long, long long> fibonacci = preprocess(twos) ;
+	vector<unsigned long long> twosVector ;
+	map<unsigned long long, bool> twos = powersOfTwo(twosVector) ;
+	map<unsigned long long, unsigned long long> fibonacci = preprocess(twos) ;
 	
 	while (t--){
 		// printVector(twosVector);
 		// cout << "input number\n" ;
 		cin >> n ;
-		long long i = 0 ;
-		long long pow = 0 ;
+		unsigned long long i = 0 ;
+		unsigned long long pow = 0 ;
 		// cout << "after input\n";
 
 		while(twosVector[i] <= n) {
@@ -75,7 +75,7 @@ int main(){
 		}
 		// cout << "here\n" ; 
 		i -- ;
-		long long val = twosVector[i] ;
+		unsigned long long val = twosVector[i] ;
 		val = val%60 ;
 		if (val == 0){
 			cout << fibonacci[60] << endl ;
