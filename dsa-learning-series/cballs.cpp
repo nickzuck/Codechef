@@ -50,23 +50,16 @@ int main(){
 		
 		for (int i = 0 ;i < primesLen ; i++){
 			long long  totalCount = 0 ;
-			bool checkedAny = false ;
+			int currentMultiple = 0 ;
 			for(int j = 0 ;j < n ; j++){
-				if (primes[i] > v[j]){
-					continue ;
+				if (v[j] > currentMultiple) {
+					currentMultiple = ((v[j] + primes[i] -1)/primes[i]) * primes[i] ;
 				}
-				checkedAny = true ;
-
-				int temp = v[j]% primes[i] ;
-				if(temp != 0 ){
-					// cout << "here : " << temp << endl ;
-					totalCount += (primes[i] - temp);
-				}
+				totalCount += currentMultiple - v[j] ;
 			}
-			// cout << primes[i] << " "  << totalCount << endl ;
-			if (checkedAny){
-				minCount = min(minCount, totalCount);	
-			}
+			
+			minCount = min(minCount, totalCount);	
+			
 
 		}
 		cout << minCount << endl ;
