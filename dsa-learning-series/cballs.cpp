@@ -31,7 +31,7 @@ void printVector(vector<int> v){
 int main(){
 	int t , n, temp; 
 	cin >> t ;
-	vector<int> primes = getPrimes(100000) ;
+	vector<int> primes = getPrimes(10002) ;
 	// printVector(primes);
 
 	int primesLen = primes.size();
@@ -50,7 +50,13 @@ int main(){
 		
 		for (int i = 0 ;i < primesLen ; i++){
 			long long  totalCount = 0 ;
+			bool checkedAny = false ;
 			for(int j = 0 ;j < n ; j++){
+				if (primes[i] > v[j]){
+					continue ;
+				}
+				checkedAny = true ;
+
 				int temp = v[j]% primes[i] ;
 				if(temp != 0 ){
 					// cout << "here : " << temp << endl ;
@@ -58,7 +64,10 @@ int main(){
 				}
 			}
 			// cout << primes[i] << " "  << totalCount << endl ;
-			minCount = min(minCount, totalCount);
+			if (checkedAny){
+				minCount = min(minCount, totalCount);	
+			}
+
 		}
 		cout << minCount << endl ;
 
