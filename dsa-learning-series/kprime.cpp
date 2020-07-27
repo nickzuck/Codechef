@@ -27,17 +27,24 @@ map<int,int> preprocess(){
 int main(){
 	int t , k, a, b; 
 	map<int, int> primes = preprocess();
+	int arr[7][MAX_LIMIT+2] ;
+	for (int i = 0; i <= MAX_LIMIT+1; ++i){
+		for(int j = 0 ; j<= 5 ;j ++){
+			if (j == 0 || i == 0){
+				arr[j][i] = 0 ;	
+			} else {
+				arr[j][i] = arr[j][i-1] ;
+			}
+		}
+		int val = primes[i] ;
+		arr[val][i] ++ ;
+	}
+
 	cin >> t ;
 	while (t--){
 
 		cin >> a >> b >> k;
-		int count = 0 ;
-		for (int i = a ; i <= b ;i++){
-			if (primes[i] == k){
-				count ++ ;
-			}
-		}
-		cout << count << endl ;
+		cout <<  arr[k][b] - arr[k][a-1]<< endl ;
 	}
 	return 0;
 }
