@@ -12,6 +12,17 @@ long long MAX_LIMIT = 1000000000;
 long long exponential_squaring(long long base, long long power, long long mod){
 	if (power == 0)
 		return 1 ;
+	long long val = exponential_squaring(base, power/2, mod);
+	val = (val * val) % mod ;
+	if (power %2){
+		val = (base * val)% mod ;
+	}
+	return val ;
+}
+
+long long exponential_squari(long long base, long long power, long long mod){
+	if (power == 0)
+		return 1 ;
 	long long val = (base % mod * base % mod)%mod;
 	if (power == 2) {
 		return val ;
@@ -21,7 +32,7 @@ long long exponential_squaring(long long base, long long power, long long mod){
 	} else {
 		return base * exponential_squaring(val , (power-1)/2, mod);
 	}
-	
+
 }
 
 long long calculate(long long n){
