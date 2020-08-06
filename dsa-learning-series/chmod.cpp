@@ -40,19 +40,15 @@ void addPrimeFactors(){
 	}
 }
 
-long long exponential_squaring(int base, int power, int mod){
+long long exponential_squaring(long long base, long long power, long long mod){
 	if (power == 0)
 		return 1 ;
-	long long val = (base % mod * base % mod)%mod;
-	if (power == 2) {
-		return val ;
+	long long val = exponential_squaring(base, power/2, mod);
+	val = (val * val) % mod ;
+	if (power %2){
+		val = (base * val)% mod ;
 	}
-	if (power %2 == 0){
-		return exponential_squaring(val, power/2, mod);
-	} else {
-		return base * exponential_squaring(val , (power-1)/2, mod);
-	}
-	
+	return val ;
 }
 
 int main(){
