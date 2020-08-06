@@ -22,27 +22,29 @@ void printVector(vector<int> v){
 	cout << "\nvector printed\n" ;
 }
 
-void addPrimeFactors(){
-	for(int i = 0 ;i < MAX_LIMIT ; i++){
-		int val = i ;
+void addPrimeFactors(vector<int> v){
+	for(int j = 0 ; j < primesLen ; j ++){
+		factorsMap[0][primes[j]] = 0 ;
+	}
+	for(int i = 1 ;i <= v.size() ; i++){
+		int val = v[i-1] ;
 		for(int j = 0 ; j < primesLen ; j ++){
-			if ( i == 0){
-				factorsMap[i][j] = 0 ;
-			} else {
-				int count = factorsMap[i-1][primes[j]] ;
-				while(val % primes[j] == 0){
-					count ++ ;
-					val /= primes[j] ;
-				}
-				factorsMap[i][primes[j]] = count ;
+			int count = factorsMap[i-1][primes[j]] ;
+			while(val % primes[j] == 0){
+				count ++ ;
+				val /= primes[j] ;
 			}
+			factorsMap[i][primes[j]] = count ;
 		}
 	}
 }
 
 long long exponential_squaring(long long base, long long power, long long mod){
-	if (power == 0)
+	if (power == 0){
+		// cout <<"hereerrerere \n";
 		return 1 ;
+	}
+	// cout << "going in " << power << endl;
 	long long val = exponential_squaring(base, power/2, mod);
 	val = (val * val) % mod ;
 	if (power %2){
@@ -62,13 +64,16 @@ int main(){
 		v.pb(temp);
 	}
 
-	addPrimeFactors();
+	addPrimeFactors(v);
+	// cout << "prime factors added\n";
 
 	cin >> q  ;
 	while(q--){
 		long long ans ;
 		cin >> a >> b >> mod;
-		ans = a;
+		// a -- ;
+		// b -- ;
+		ans = 1;
 
 		if (a != b){
 			for(int i = 0 ;i < primesLen; i++){
@@ -76,10 +81,11 @@ int main(){
 				int primeVal = primes[i] ;
 				// cout << "prime val : " << primeVal << endl ;
 				// cout << "factorsMap : " << factorsMap[b][primeVal]  << endl ;
-				// cout <<  "factorsMapOther : " <<  factorsMap[a][primeVal] << endl ;
-				long long temp = exponential_squaring(primeVal, factorsMap[b][primeVal] - factorsMap[a][primeVal], mod);
+				// cout <<  "factorsMapOther : " <<  factorsMap[a-1][primeVal] << endl ;
+				long long temp = exponential_squaring(primeVal, factorsMap[b][primeVal] - factorsMap[a-1][primeVal], mod);
 				// cout << "temp = " << temp << endl ;
 				ans *= temp ;
+				// cout << "ans = " << ans << endl ;
 				ans %= mod ;
 			}
 		}
