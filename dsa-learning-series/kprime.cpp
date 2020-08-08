@@ -6,7 +6,7 @@
 
 using namespace std ;
 
-int MAX_LIMIT = 100000 ;
+int MAX_LIMIT = 1e5 + 1;
 
 map<int,int> preprocess(){
 	int limit = sqrt(MAX_LIMIT);
@@ -14,7 +14,7 @@ map<int,int> preprocess(){
 	// for(int i = 2 ;i < MAX_LIMIT ; i++){
 	// 	primes[i] = 0 ;
 	// }
-	for(int i = 2 ; i <= limit ;i++){
+	for(int i = 2 ; i <= MAX_LIMIT ;i++){
 		if (primes[i] == 0){
 			for(int j = i ; j <= MAX_LIMIT ; j += i){
 				primes[j] ++ ;
@@ -28,8 +28,8 @@ int main(){
 	int t , k, a, b; 
 	map<int, int> primes = preprocess();
 	int arr[7][MAX_LIMIT+2] ;
-	for (int i = 0; i <= MAX_LIMIT+1; ++i){
-		for(int j = 0 ; j<= 5 ;j ++){
+	for (int i = 0; i <= MAX_LIMIT+1; i++){
+		for(int j = 1 ; j<= 5 ;j ++){
 			if (j == 0 || i == 0){
 				arr[j][i] = 0 ;	
 			} else {
