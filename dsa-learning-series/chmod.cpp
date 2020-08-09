@@ -3,6 +3,7 @@
 #define pr pair<long long, long long>
 #define pb push_back
 #define mp make_pair
+#define LL long long
 
 using namespace std ;
 
@@ -39,18 +40,19 @@ void addPrimeFactors(vector<long long> v){
 	}
 }
 
-long long exponential_squaring(long long base, long long power, long long mod){
-	if (power == 0){
-		// cout <<"hereerrerere \n";
-		return 1 ;
+inline LL exponential_squaring(LL a, LL b, LL m)
+{
+	if(b == 0) return 1 % m;
+
+	LL x = a, ans = 1;
+
+	while(b)
+	{
+		if(b&1) ans = (ans * x)%m;
+		b >>= 1;
+		x = (x*x)%m;
 	}
-	// cout << "going in " << power << endl;
-	long long val = exponential_squaring(base, power/2, mod);
-	val = (val * val) % mod ;
-	if (power %2){
-		val = (base * val)% mod ;
-	}
-	return val ;
+	return ans ;	
 }
 
 int main(){
@@ -85,6 +87,9 @@ int main(){
 				long long temp = exponential_squaring(primeVal, factorsMap[b][primeVal] - factorsMap[a-1][primeVal], mod);
 				// cout << "temp = " << temp << endl ;
 				ans = (ans * temp)%mod ;
+				if (ans == 0) {
+					break;
+				}
 				// cout << "ans = " << ans << endl ;
 				// ans %= mod ;
 			}
