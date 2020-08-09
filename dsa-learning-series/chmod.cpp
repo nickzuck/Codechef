@@ -22,7 +22,7 @@ void printVector(vector<int> v){
 	cout << "\nvector printed\n" ;
 }
 
-void addPrimeFactors(vector<int> v){
+void addPrimeFactors(vector<long long> v){
 	for(int j = 0 ; j < primesLen ; j ++){
 		factorsMap[0][primes[j]] = 0 ;
 	}
@@ -54,9 +54,9 @@ long long exponential_squaring(long long base, long long power, long long mod){
 }
 
 int main(){
-	int q, n , a , b , temp, mod;
+	long long q, n , a , b , temp, mod;
 	cin >> n ;
-	vector<int> v ;
+	vector<long long> v ;
 
 	// printVector(primes);
 	for(int i= 0 ;i < n ;i++){
@@ -84,14 +84,14 @@ int main(){
 				// cout <<  "factorsMapOther : " <<  factorsMap[a-1][primeVal] << endl ;
 				long long temp = exponential_squaring(primeVal, factorsMap[b][primeVal] - factorsMap[a-1][primeVal], mod);
 				// cout << "temp = " << temp << endl ;
-				ans *= temp ;
+				ans = (ans * temp)%mod ;
 				// cout << "ans = " << ans << endl ;
-				ans %= mod ;
+				// ans %= mod ;
 			}
 		}
 		
 
-		cout << ans % mod << endl ;
+		cout << ans << endl ;
 	}
 
 	return 0;
