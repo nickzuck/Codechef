@@ -1,35 +1,35 @@
 #include<bits/stdc++.h>
 
-#define pr pair<int, int>
+#define pr pair<long long, long long>
 #define pb push_back
 #define mp make_pair
 
 using namespace std ;
 
-vector<int> primes {2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71,
+vector<long long> primes {2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71,
 					 73, 79, 83, 89, 97};
 
-int MAX_LIMIT = 100001;
-int primesLen = primes.size();
-int factorsMap[100001][100] ;
+long long MAX_LIMIT = 100001;
+long long primesLen = primes.size();
+long long factorsMap[100001][100] ;
 
-void printVector(vector<int> v){
+void printVector(vector<long long> v){
 	cout << "printing vector \n" ;
 	cout << "size of vector : " << v.size() << endl ;  
-	for(int i = 0 ;i < v.size() ; i++){
+	for(long long i = 0 ;i < v.size() ; i++){
 		cout << v[i] << " " ;
 	}
 	cout << "\nvector printed\n" ;
 }
 
 void addPrimeFactors(vector<long long> v){
-	for(int j = 0 ; j < primesLen ; j ++){
+	for(long long j = 0 ; j < primesLen ; j ++){
 		factorsMap[0][primes[j]] = 0 ;
 	}
-	for(int i = 1 ;i <= v.size() ; i++){
-		int val = v[i-1] ;
-		for(int j = 0 ; j < primesLen ; j ++){
-			int count = factorsMap[i-1][primes[j]] ;
+	for(long long i = 1 ;i <= v.size() ; i++){
+		long long val = v[i-1] ;
+		for(long long j = 0 ; j < primesLen ; j ++){
+			long long count = factorsMap[i-1][primes[j]] ;
 			while(val % primes[j] == 0){
 				count ++ ;
 				val /= primes[j] ;
@@ -58,8 +58,8 @@ int main(){
 	cin >> n ;
 	vector<long long> v ;
 
-	// printVector(primes);
-	for(int i= 0 ;i < n ;i++){
+	// prlong longVector(primes);
+	for(long long i= 0 ;i < n ;i++){
 		cin >> temp ;
 		v.pb(temp);
 	}
@@ -76,9 +76,9 @@ int main(){
 		ans = 1;
 
 		if (a != b){
-			for(int i = 0 ;i < primesLen; i++){
+			for(long long i = 0 ;i < primesLen; i++){
 				// cout << "i = " << i << endl ;
-				int primeVal = primes[i] ;
+				long long primeVal = primes[i] ;
 				// cout << "prime val : " << primeVal << endl ;
 				// cout << "factorsMap : " << factorsMap[b][primeVal]  << endl ;
 				// cout <<  "factorsMapOther : " <<  factorsMap[a-1][primeVal] << endl ;
@@ -88,10 +88,13 @@ int main(){
 				// cout << "ans = " << ans << endl ;
 				// ans %= mod ;
 			}
+			cout << ans % mod << endl ;
+		} else {
+			cout << v[a-1] % mod << endl ;
 		}
 		
 
-		cout << ans << endl ;
+		
 	}
 
 	return 0;
