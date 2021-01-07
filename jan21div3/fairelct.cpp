@@ -33,6 +33,9 @@ int main(){
 
 		int i = 0 , j = m-1 , count = 0;
 		while (sa < sb && i < n && j >= 0){
+			if (a[i] == b[j]){
+				continue ;
+			}
 			sa -= a[i] ; 
 			sa += b[j] ;
 
