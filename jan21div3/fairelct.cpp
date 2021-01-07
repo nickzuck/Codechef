@@ -7,6 +7,25 @@
 
 using namespace std ;
 
+int solveSubTask1(ll sa, ll sb, int n, int m, int aVal, int bVal){
+	if (sa > sb){
+		return 0 ;
+	}
+
+	int count = 0 ;
+	while(sa <= sb && count < n && count < m){
+		sa -= aVal ;  sa += bVal;
+		sb -= bVal ; sb += aVal;
+		count ++ ;
+	}
+
+	if (sa <= sb){
+		return -1 ;
+	}
+	return count ;
+
+}
+
 int main(){
 	int t , n, m, temp ; 
 	cin >> t ;
@@ -14,44 +33,23 @@ int main(){
 		cin >> n >> m ;
 		ll sa, sb ;
 		vector<int> a , b ;
+		int val1, val2 ;
 		for (int i = 0 ; i < n ;i++){
 			cin >> temp ;
 			a.pb(temp);
 			sa += temp ; 
+			val1 = temp ;
 		}
 
 		for(int i = 0 ; i < m ;i++){
 			cin >> temp ;
 			b.pb(temp);
 			sb += temp ;
+			val2 = temp ;
 		}
+		int ans = solveSubTask1(sa, sb, n, m, val1, val2);
+		cout << ans << endl ;
 
-		if (sa < sb){
-			sort(a.begin(), a.end());
-			sort(b.begin(), b.end());
-		}
-
-		int i = 0 , j = m-1 , count = 0;
-		while (sa < sb && i < n && j >= 0){
-			if (a[i] == b[j]){
-				continue ;
-			}
-			sa -= a[i] ; 
-			sa += b[j] ;
-
-			sb -= b[j] ;
-			sb += a[i] ;
-
-			i ++ ; 
-			j -- ;
-			count ++ ;
-		}
-		// cout << "sa, sb : " << sa << "  " << sb << endl ;
-		if (sa < sb){
-			cout << -1  << endl ;
-		} else {
-			cout << count << endl ;
-		}
 	}
 	return 0;
 }
