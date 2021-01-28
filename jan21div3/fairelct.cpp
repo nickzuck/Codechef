@@ -14,7 +14,7 @@ int main(){
 	cin >> t ;
 	while (t--){
 		cin >> n >> m ;
-		ll sa, sb ;
+		ll sa = 0 , sb = 0;
 		vector<int> a , b ;
 		for (int i = 0 ; i < n ;i++){
 			cin >> temp ;
@@ -28,24 +28,22 @@ int main(){
 			sb += temp ;
 		}
 
-		if (sa < sb){
-			sort(a.begin(), a.end());
-			sort(b.begin(), b.end());
-		}
+		// if (sa <= sb){
+		sort(a.begin(), a.end());
+		sort(b.begin(), b.end());
+		// }
 
 		int i = 0 , j = m-1 , count = 0;
-		while (sa <= sb && i < n && j >= 0){
-			if (a[i] >= b[j]){
+		for(int i = 0 ; i < min(n, m); i++){
+			if(sa > sb){
 				break ;
 			}
 			sa -= a[i] ; 
-			sa += b[j] ;
+			sa += b[m-i-1] ;
 
-			sb -= b[j] ;
+			sb -= b[m-i-1] ;
 			sb += a[i] ;
 
-			i ++ ; 
-			j -- ;
 			count ++ ;
 		}
 		// cout << "sa, sb : " << sa << "  " << sb << endl ;
