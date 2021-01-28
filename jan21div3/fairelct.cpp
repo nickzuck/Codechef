@@ -1,4 +1,6 @@
-#include<bits/stdc++.h>
+#include<algorithm>
+#include<vector>
+#include<iostream>
 
 #define pr pair<int, int>
 #define pb push_back
@@ -8,7 +10,7 @@
 using namespace std ;
 
 int solveSubTask1(ll sa, ll sb, int n, int m, int aVal, int bVal){
-	if (sa > sb){
+	if (sa >= sb){
 		return 0 ;
 	}
 
