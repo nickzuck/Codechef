@@ -34,9 +34,9 @@ int main(){
 		}
 
 		int i = 0 , j = m-1 , count = 0;
-		while (sa < sb && i < n && j >= 0){
-			if (a[i] == b[j]){
-				continue ;
+		while (sa <= sb && i < n && j >= 0){
+			if (a[i] >= b[j]){
+				break ;
 			}
 			sa -= a[i] ; 
 			sa += b[j] ;
@@ -49,10 +49,10 @@ int main(){
 			count ++ ;
 		}
 		// cout << "sa, sb : " << sa << "  " << sb << endl ;
-		if (sa < sb){
-			cout << -1  << endl ;
-		} else {
+		if (sa > sb){
 			cout << count << endl ;
+		} else {
+			cout << -1 << endl ;
 		}
 	}
 	return 0;
