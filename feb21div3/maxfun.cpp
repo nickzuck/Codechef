@@ -19,8 +19,8 @@ int main(){
 
 		unsigned long long maxVal = 0 ;
 		for(int i = 0; i< n ; i++){
-			for(int j = 0; j < n ; j++){
-				for(int k = 0 ; k < n ; k++){
+			for(int j = i+1; j < n ; j++){
+				for(int k = j+1 ; k < n ; k++){
 					unsigned long long currVal = abs(v[i]-v[j]) + abs(v[j]-v[k]) + abs(v[k] - v[i]) ;
 					maxVal = max(currVal, maxVal);
 				}
