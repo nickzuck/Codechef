@@ -17,11 +17,11 @@ int main(){
 			v.pb(temp);
 		}
 
-		long long maxVal = -1 ;
+		unsigned long long maxVal = 0 ;
 		for(int i = 0; i< n ; i++){
 			for(int j = 0; j < n ; j++){
 				for(int k = 0 ; k < n ; k++){
-					long long currVal = abs(v[i]-v[j]) + abs(v[j]-v[k]) + abs(v[k] - v[i]) ;
+					unsigned long long currVal = abs(v[i]-v[j]) + abs(v[j]-v[k]) + abs(v[k] - v[i]) ;
 					maxVal = max(currVal, maxVal);
 				}
 			}
