@@ -11,22 +11,15 @@ int main(){
 	cin >> t ;
 	while (t--){
 		cin >> n ;
-		vector<int> v ; 
+		vector<long long> v ; 
 		for(int i =0 ; i< n ; i++){
 			cin >> temp ; 
 			v.pb(temp);
 		}
 
-		unsigned long long maxVal = 0 ;
-		for(int i = 0; i< n ; i++){
-			for(int j = i+1; j < n ; j++){
-				for(int k = j+1 ; k < n ; k++){
-					unsigned long long currVal = abs(v[i]-v[j]) + abs(v[j]-v[k]) + abs(v[k] - v[i]) ;
-					maxVal = max(currVal, maxVal);
-				}
-			}
-		}
-		cout << maxVal << endl ;  
+		sort(v.begin(), v.end());
+		unsigned long long ans = abs(v[0]-v[1]) + abs(v[1] - v[n-1]) + abs(v[n-1]- v[0]); 
+		cout << ans << endl ;
 	}
 	return 0;
 }
