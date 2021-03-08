@@ -8,12 +8,12 @@
 using namespace std ;
 
 int main(){
-	int t , n, temp; 
+	long int t , n, temp; 
 	cin >> t ;
 	while (t--){
 		cin >> n ;
 		// cout << "n = " << n << endl ;
-		vector<int> v ; 
+		vector<long int> v ; 
 		for(int i = 0 ; i < n ;i++){
 			cin >> temp ;
 			v.pb(temp);
