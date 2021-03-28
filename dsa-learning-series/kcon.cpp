@@ -1,0 +1,80 @@
+#include<bits/stdc++.h>
+
+#define ll long long
+#define pb push_back 
+
+using namespace std ;
+
+ll array_sum(vector<int> v){
+	ll sum = 0 ;
+	for(int i= 0 ; i < v.size(); i++){
+		sum += v[i];
+	}
+	return sum ;
+}
+
+ll max_subarray_sum(vector<int> v){
+	ll max_sum = 0 ; 
+	ll curr_sum = 0 ;
+	int start = 0 ;
+	// int end = 0 ;
+
+	max_sum = LLONG_MIN ;
+	curr_sum = 0 ;
+	for(int i = 0 ; i< v.size() ;i++){
+		curr_sum += v[i] ;
+		max_sum = max(curr_sum, max_sum);
+		while (curr_sum <=0 and start <= i){
+			curr_sum -= v[start] ;
+			start ++ ;
+		}
+		if (curr_sum < 0)
+			curr_sum = 0 ;
+	}
+	return max_sum ;
+}
+
+
+ll prefix_suffix_max(vector<int> v){
+	// int n = v.size();
+	// vector<ll> prefix_sum, suffix_sum(n) ; 
+
+	// prefix_sum.pb(v[0]) ;
+	// for(int i = 1 ; i < v.size(); i++){
+	// 	prefix_sum.pb(prefix_sum[i-1] + v[i]);
+	// }
+
+	// suffix_sum[n-1] = v[n-1];
+	// for(int i = n-2 ; i >=0 ; i--){
+	// 	suffix_sum[i] = suffix_sum[i+1] + v[i];
+	// }
+	// ll val_max = prefix_sum[0] + suffix_sum[0];
+	// for(int i =1 ; i< n; i++){
+	// 	val_max = max(prefix_sum[i] + suffix_sum[i], val_max); 
+	// }
+
+	// return val_max ;
+	vector<int> tempv = v ;
+	// cout <<"f\n";
+	tempv.insert(tempv.end(), v.begin(), v.end());
+	// cout << "s\n";
+	tempv.insert(tempv.end(), v.begin(), v.end());
+	// cout << "t\n";
+	return max_subarray_sum(tempv);
+
+}
+
+int main(){
+	int t, n, k, temp ;
+	cin >> t ; 
+	while(t--){
+		cin >> n >> k ;
+		vector<int> v ; 
+		for(int i = 0 ; i< n; i++){
+			cin >> temp ;
+			v.pb(temp);
+		}
+		cout << max(array_sum(v)*k , max(max_subarray_sum(v), prefix_suffix_max(v))) << endl ;
+	}
+	return 0;
+}
