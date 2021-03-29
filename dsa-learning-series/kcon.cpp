@@ -5,7 +5,7 @@
 
 using namespace std ;
 
-ll array_sum(vector<int> v){
+ll array_sum_func(vector<int> v){
 	ll sum = 0 ;
 	for(int i= 0 ; i < v.size(); i++){
 		sum += v[i];
@@ -34,33 +34,24 @@ ll max_subarray_sum(vector<int> v){
 	return max_sum ;
 }
 
-
 ll prefix_suffix_max(vector<int> v){
-	// int n = v.size();
-	// vector<ll> prefix_sum, suffix_sum(n) ; 
+	int n = v.size();
+	vector<ll> prefix_sum, suffix_sum(n) ; 
 
-	// prefix_sum.pb(v[0]) ;
-	// for(int i = 1 ; i < v.size(); i++){
-	// 	prefix_sum.pb(prefix_sum[i-1] + v[i]);
-	// }
+	prefix_sum.pb(v[0]) ;
+	for(int i = 1 ; i < v.size(); i++){
+		prefix_sum.pb(prefix_sum[i-1] + v[i]);
+	}
 
-	// suffix_sum[n-1] = v[n-1];
-	// for(int i = n-2 ; i >=0 ; i--){
-	// 	suffix_sum[i] = suffix_sum[i+1] + v[i];
-	// }
-	// ll val_max = prefix_sum[0] + suffix_sum[0];
-	// for(int i =1 ; i< n; i++){
-	// 	val_max = max(prefix_sum[i] + suffix_sum[i], val_max); 
-	// }
-
-	// return val_max ;
-	vector<int> tempv = v ;
-	// cout <<"f\n";
-	tempv.insert(tempv.end(), v.begin(), v.end());
-	// cout << "s\n";
-	tempv.insert(tempv.end(), v.begin(), v.end());
-	// cout << "t\n";
-	return max_subarray_sum(tempv);
+	suffix_sum[n-1] = v[n-1];
+	for(int i = n-2 ; i >=0 ; i--){
+		suffix_sum[i] = suffix_sum[i+1] + v[i];
+	}
+	
+	ll v1 = *max_element(prefix_sum.begin(), prefix_sum.end()); 
+	ll v2 = *max_element(suffix_sum.begin(), suffix_sum.end());
+	
+	return v1 + v2 ;
 
 }
 
@@ -74,7 +65,21 @@ int main(){
 			cin >> temp ;
 			v.pb(temp);
 		}
-		cout << max(array_sum(v)*k , max(max_subarray_sum(v), prefix_suffix_max(v))) << endl ;
+
+		ll prefix_sum = 0 ;
+		if (k> 1)
+			prefix_sum = prefix_suffix_max(v);
+
+		ll array_sum = array_sum_func(v) ;
+
+		// cout << "array sum : "<< array_sum << endl ;
+		// cout << "prefix_sum: "<< prefix_sum << endl ;
+		// cout << "n = " << n << endl ;
+		if (array_sum > 0) {
+			prefix_sum = prefix_sum + array_sum * (k-2) ;
+		}
+
+		cout << max(array_sum*k , max(max_subarray_sum(v), prefix_sum)) << endl ;
 	}
 	return 0;
 }
