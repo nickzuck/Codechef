@@ -6,6 +6,7 @@
 using namespace std ;
 
 ll array_sum_func(vector<int> v){
+
 	ll sum = 0 ;
 	for(int i= 0 ; i < v.size(); i++){
 		sum += v[i];
@@ -80,6 +81,7 @@ int main(){
 		}
 
 		cout << max(array_sum*k , max(max_subarray_sum(v), prefix_sum)) << endl ;
+
 	}
 	return 0;
 }
